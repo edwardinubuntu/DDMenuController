@@ -64,7 +64,7 @@ typedef enum {
 
 @property(nonatomic,readonly) UITapGestureRecognizer *tap;
 @property(nonatomic,readonly) UIPanGestureRecognizer *pan;
-@property(nonatomic,assign) BOOL isSupportPan;
+@property(nonatomic,assign) BOOL isTableViewSupportPan;
 
 - (void)setRootController:(UIViewController *)controller animated:(BOOL)animated;
 

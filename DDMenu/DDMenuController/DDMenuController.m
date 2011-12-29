@@ -49,11 +49,11 @@
 @synthesize tap=_tap;
 @synthesize pan=_pan;
 
-@synthesize isSupportPan = _isSupportPan;
+@synthesize isTableViewSupportPan = _isTableViewSupportPan;
 
 - (id)initWithRootViewController:(UIViewController*)controller {
     if ((self = [super initWithRootViewController:controller])) {
-      _isSupportPan = YES;
+      _isTableViewSupportPan = YES;
     }
     return self;
 }
@@ -75,11 +75,16 @@
         _tap = tap;
     }
     
-    if (!_pan && self.isSupportPan) {
-        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
-        pan.delegate = (id<UIGestureRecognizerDelegate>)self;
+    if (!_pan) {
+      UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
+      pan.delegate = (id<UIGestureRecognizerDelegate>)self;
+      _pan = pan;
+      if (self.isTableViewSupportPan) {
         [self.view addGestureRecognizer:pan];
-        _pan = pan;
+      } else {
+        [self.navigationBar addGestureRecognizer:pan];
+      }
+        
     }
     
 }
