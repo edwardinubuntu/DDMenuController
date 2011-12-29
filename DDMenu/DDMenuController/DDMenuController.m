@@ -49,9 +49,11 @@
 @synthesize tap=_tap;
 @synthesize pan=_pan;
 
+@synthesize isSupportPan = _isSupportPan;
+
 - (id)initWithRootViewController:(UIViewController*)controller {
     if ((self = [super initWithRootViewController:controller])) {
-
+      _isSupportPan = YES;
     }
     return self;
 }
@@ -73,7 +75,7 @@
         _tap = tap;
     }
     
-    if (!_pan) {
+    if (!_pan && self.isSupportPan) {
         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
         pan.delegate = (id<UIGestureRecognizerDelegate>)self;
         [self.view addGestureRecognizer:pan];
